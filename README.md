@@ -1,35 +1,23 @@
-# Miniso Toko: membuat aplikasi Android dan iPhone
+# Miniso Toko: panduan GitHub Pages
 
-Proyek ini memakai Capacitor. Isi aplikasi ada di folder `www`.
+## 1. Pasang di GitHub (sekali saja)
+1. Buat akun di github.com, lalu buat repository baru (misalnya `miniso-toko`), pilih Public.
+2. Di halaman repository klik Add file, lalu Upload files. Tarik SEMUA isi folder ini (index.html, edits.json, manifest.json, sw.js, dua file icon, dan folder sprites) lalu klik Commit changes.
+3. Buka Settings, lalu Pages. Pada Source pilih Deploy from a branch, branch main, folder / (root), lalu Save.
+4. Tunggu 1 sampai 3 menit. Alamat aplikasi: https://NAMA-GITHUB-ANDA.github.io/miniso-toko/
 
-## Persiapan (sekali)
-1. Pasang Node.js (nodejs.org).
-2. Ganti alamat di `www/config.js` dengan alamat edits.json di GitHub Pages Anda (contoh: https://budi.github.io/miniso-toko/edits.json). Staf kemudian selalu melihat data terbaru dari kepala toko.
-3. Buka terminal di folder ini, lalu jalankan:
-```
-npm install @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios
-npm install -D @capacitor/assets
-npx cap add android
-npx cap add ios        # hanya di Mac
-npx capacitor-assets generate   # membuat ikon dari assets/icon.png
-npx cap sync
-```
+Catatan: repository Public berarti file data (harga dan promo) bisa dibaca siapa pun yang tahu alamatnya. Repository Private untuk Pages butuh paket berbayar GitHub.
 
-## Izin kamera (untuk scan barcode)
-- Android: buka `android/app/src/main/AndroidManifest.xml`, lalu tambahkan di dalam `<manifest>`:
-  `<uses-permission android:name="android.permission.CAMERA" />`
-- iPhone: buka `ios/App/App/Info.plist`, lalu tambahkan:
-  `<key>NSCameraUsageDescription</key><string>Kamera dipakai untuk scan barcode produk</string>`
-Lalu jalankan `npx cap sync` lagi.
+## 2. Pasang di HP staf
+Buka alamat di Chrome (Android): menu tiga titik, lalu Tambahkan ke layar utama. Di iPhone buka dengan Safari: tombol Bagikan, lalu Tambah ke Layar Utama.
 
-## Android (APK)
-1. Pasang Android Studio, lalu jalankan `npx cap open android`.
-2. Pilih menu Build, Build Bundle(s) / APK(s), lalu Build APK(s).
-3. File APK dibagikan ke HP staf. Di HP, izinkan pemasangan dari sumber lain. Untuk Google Play butuh akun developer Google dan file AAB (menu Build, Generate Signed Bundle).
+## 3. Mode kepala toko
+Di HP kepala toko, buka alamat aplikasi dengan tambahan `#admin` di belakangnya, sekali saja (contoh: .../miniso-toko/#admin). Menu Kelola data akan muncul. Staf tidak melihat menu itu.
 
-## iPhone
-1. Butuh Mac dengan Xcode dan akun Apple Developer berbayar untuk dipasang ke HP staf lewat TestFlight atau App Store.
-2. Jalankan `npx cap open ios`, pilih Team dan perangkat di Xcode, lalu Run atau Archive.
+## 4. Mengubah produk dan membagikannya ke staf
+1. Kepala toko edit di menu Kelola data (edit, tambah, impor Excel, foto).
+2. Klik Unduh edits.json (untuk staf).
+3. Di GitHub buka repository, Add file, Upload files, tarik file edits.json yang baru (nama harus sama), lalu Commit changes.
+4. Staf menutup dan membuka ulang aplikasi. Perubahan muncul setelah 1 sampai 2 menit.
 
-## Mengubah data
-Kepala toko tetap mengedit lewat situs GitHub Pages di browser (alamat dengan `#admin`), lalu mengunggah edits.json baru ke GitHub. Aplikasi mengambil data itu saat dibuka, jadi aplikasi tidak perlu dibangun ulang saat harga berubah. Menu Kelola data tidak dimaksudkan untuk dipakai di dalam aplikasi ini.
+Hanya pemilik repository (dan orang yang Anda tambahkan sebagai collaborator) yang bisa mengganti edits.json, jadi hanya kepala toko yang dapat mengubah data yang dilihat staf. Mode #admin hanya menampilkan menu di HP; perlindungan sebenarnya ada di akses ke repository GitHub.
